@@ -1,0 +1,97 @@
+/* Local object motion; the illustration plate stays still. SVG masks remove
+   every moving fragment from the plate, so there is no second object behind it. */
+.scene-illustration :is(.scene-part,.scene-discovery,.scene-steam-lines){
+  transform-box:view-box;
+  animation-timing-function:cubic-bezier(.45,0,.25,1);
+  animation-iteration-count:infinite;
+  animation-play-state:running;
+}
+.scene-illustration .scene-map{animation-name:scene-map-unfold;animation-duration:5.8s}
+.scene-illustration .scene-discovery{transform-origin:680px 158px;animation-name:scene-discovery;animation-duration:4.8s}
+.scene-illustration .scene-lamp{animation-name:scene-lamp-sway;animation-duration:5.6s}
+.scene-illustration .scene-pen{animation-name:scene-writing;animation-duration:3.2s}
+.scene-illustration .scene-page{animation-name:scene-page-turn;animation-duration:6.4s;animation-delay:-1.2s}
+.scene-illustration .scene-photo-one{animation-name:scene-photo-swing;animation-duration:4.8s}
+.scene-illustration .scene-photo-two{animation-name:scene-photo-swing;animation-duration:5.6s;animation-delay:-1.8s;animation-direction:reverse}
+.scene-illustration .scene-clip{animation-name:scene-clip-tilt;animation-duration:4.8s;animation-delay:-.8s}
+.scene-illustration .scene-clapper{animation-name:scene-clap;animation-duration:4.8s}
+.scene-illustration .scene-camera{animation-name:scene-camera-pan;animation-duration:6.4s;animation-delay:-1.6s}
+.scene-illustration .scene-storyboards path{opacity:0;animation-name:scene-frame-light;animation-duration:6s}
+.scene-illustration .scene-frame-two{animation-delay:-4s}
+.scene-illustration .scene-frame-three{animation-delay:-2s}
+.scene-illustration .scene-steam-lines{fill:none;stroke:#fff7e4;stroke-width:5;stroke-linecap:round;opacity:.65;animation-name:scene-steam;animation-duration:3.8s}
+/* Editing a completed shoot emphasizes its storyboard, instead of clapping
+   another take. Each frame fades slowly; no flashing or whole-image floating. */
+.scene-film[data-variant=after] .scene-clapper{animation-name:none}
+.scene-film[data-variant=after] .scene-camera{animation-duration:7s}
+.scene-film[data-variant=after] .scene-storyboards path{animation-duration:4.8s}
+.scene-film[data-variant=after] .scene-frame-two{animation-delay:-3.2s}
+.scene-film[data-variant=after] .scene-frame-three{animation-delay:-1.6s}
+.scene-illustration[data-paused=true] *{animation-play-state:paused!important}
+
+@keyframes scene-map-unfold{
+  0%,100%{transform:rotate(0) translate(0,0)}
+  28%{transform:rotate(-7deg) translate(-5px,-3px)}
+  58%{transform:rotate(3deg) translate(2px,0)}
+  78%{transform:rotate(-2deg) translate(-1px,-1px)}
+}
+@keyframes scene-discovery{
+  0%,100%{opacity:.1;transform:scale(.8)}
+  35%{opacity:.6;transform:scale(1.2)}
+  72%{opacity:0;transform:scale(1.6)}
+}
+@keyframes scene-lamp-sway{
+  0%,100%{transform:rotate(0)}
+  30%{transform:rotate(-5deg)}
+  65%{transform:rotate(4deg)}
+}
+@keyframes scene-writing{
+  0%,100%{transform:rotate(0) translate(0,0)}
+  16%,50%{transform:rotate(-8deg) translate(-2px,1px)}
+  32%,66%{transform:rotate(6deg) translate(2px,-1px)}
+  84%{transform:rotate(-3deg)}
+}
+@keyframes scene-page-turn{
+  0%,100%{transform:rotate(0) skewX(0)}
+  38%{transform:rotate(-14deg) skewX(-8deg)}
+  66%{transform:rotate(4deg) skewX(3deg)}
+  84%{transform:rotate(-3deg) skewX(-2deg)}
+}
+@keyframes scene-steam{
+  0%{opacity:0;transform:translate(0,10px) scaleX(.9)}
+  28%{opacity:.8;transform:translate(3px,-1px) scaleX(1)}
+  64%{opacity:.5;transform:translate(-3px,-15px) scaleX(1.08)}
+  100%{opacity:0;transform:translate(2px,-28px) scaleX(1.12)}
+}
+@keyframes scene-photo-swing{
+  0%,100%{transform:rotate(0) translateY(0)}
+  26%{transform:rotate(-8deg) translateY(-2px)}
+  58%{transform:rotate(6deg) translateY(1px)}
+  82%{transform:rotate(-3deg)}
+}
+@keyframes scene-clip-tilt{
+  0%,100%{transform:rotate(0) translateY(0)}
+  32%{transform:rotate(14deg) translateY(-5px)}
+  62%{transform:rotate(-8deg) translateY(-1px)}
+}
+@keyframes scene-clap{
+  0%,100%{transform:rotate(0)}
+  30%{transform:rotate(40deg)}
+  42%{transform:rotate(35deg)}
+  52%{transform:rotate(40deg)}
+  78%{transform:rotate(-4deg)}
+}
+@keyframes scene-camera-pan{
+  0%,100%{transform:rotate(0)}
+  30%{transform:rotate(-6deg)}
+  65%{transform:rotate(5deg)}
+}
+@keyframes scene-frame-light{
+  0%,64%,100%{opacity:0}
+  24%,40%{opacity:.4}
+}
+@media(prefers-reduced-motion:reduce){
+  .scene-illustration :is(.scene-part,.scene-discovery,.scene-steam-lines){animation:none!important;transform:none!important}
+  .scene-illustration :is(.scene-discovery,.scene-storyboards){opacity:0}
+  .scene-illustration .scene-steam-lines{opacity:.65}
+}

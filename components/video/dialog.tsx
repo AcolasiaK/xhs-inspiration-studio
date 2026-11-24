@@ -1,0 +1,3 @@
+import { useEffect,useRef,type ReactNode } from "react";
+import { X } from "lucide-react";
+export function VideoDialog({title,children,onClose,locked=false}:{title:string;children:ReactNode;onClose:()=>void;locked?:boolean}){const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{ref.current?.showModal();},[]);return <dialog ref={ref} className="guide-dialog video-dialog" aria-label={title} onCancel={e=>{e.preventDefault();if(!locked)onClose();}}><div className="video-block-heading"><h2>{title}</h2><button className="close-button" type="button" aria-label={`关闭${title}`} disabled={locked} onClick={onClose}><X size={18}/></button></div>{children}</dialog>;}

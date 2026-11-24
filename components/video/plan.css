@@ -1,0 +1,76 @@
+/* Read-first plan styles are scoped so the existing input column stays unchanged. */
+.video-results { color: #464443; }
+.video-results .plan-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.video-results .plan-header h2 { font-size: 22px; line-height: 1.4; color: #383432; }
+.plan-meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 12px; color: #70655e; font-size: 13px; }
+.plan-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.plan-save { font-size: 12px; color: #587561; margin: 15px 0; line-height: 1.7; }
+.plan-save-error { color: #a84f3e; }
+.video-results .video-basis { color: #74675f; margin: 18px 0; overflow-wrap: anywhere; }
+.video-results .video-basis summary { min-height: 38px; padding: 6px 0; }
+.video-results .video-basis ol { list-style: decimal; padding-left: 22px; }
+.plan-overview { padding: 18px; border-radius: 12px; background: #faf5ef; margin: 20px 0 24px; }
+.plan-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.video-results .plan-heading h3, .plan-section-intro h3 { font-size: 16px; font-weight: 600; color: #433c38; line-height: 1.6; }
+.plan-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.video-results .copy-button, .video-results .secondary-button, .plan-editor .secondary-button { min-height: 38px; font-size: 12px; padding: 8px 10px; gap: 6px; line-height: 1.5; }
+.video-results .copy-button { color: #756054; }
+.video-results .text-button, .plan-editor .text-button { font-size: 12px; min-height: 38px; padding: 7px 0; line-height: 1.7; }
+.plan-text { min-width: 0; }
+.plan-text p { font-size: 14px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; color: #514b47; }
+.plan-opening { margin-top: 14px; padding-left: 14px; border-left: 2px solid #d5a88f; }
+.plan-label { display: block; font-size: 12px; font-weight: 600; color: #86624e; margin-bottom: 6px; }
+.plan-tabs { display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #e8e0d9; padding-bottom: 12px; margin-bottom: 22px; }
+.plan-tabs button { padding: 10px 12px; min-height: 42px; border-radius: 8px; font-size: 13px; color: #70665e; background: #f7f7f5; border: 1px solid transparent; line-height: 1.5; }
+.plan-tabs button[aria-selected="true"] { background: #fff0e8; border-color: #e7c8b9; color: #9d513c; font-weight: 600; }
+.video-results button:focus-visible, .plan-panel:focus-visible, .plan-editor button:focus-visible { outline: 2px solid #bd7558; outline-offset: 3px; }
+.plan-section-intro { margin-bottom: 18px; }
+.plan-section-intro p, .plan-help { margin-top: 6px; font-size: 12px; color: #766c65; line-height: 1.9; overflow-wrap: anywhere; }
+.plan-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; }
+.plan-steps > li { min-width: 0; }
+.plan-step { padding: 18px; border: 1px solid #e8ddd4; border-radius: 12px; background: #fffdfa; }
+.plan-step-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.plan-step-header h4 { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #55473f; }
+.plan-step-number { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: #f4e6dc; color: #9a6146; font-size: 17px; font-variant-numeric: tabular-nums; }
+.plan-step-time { font-size: 12px; color: #766254; font-variant-numeric: tabular-nums; }
+.plan-step-time strong { font-size: 18px; color: #5c4030; font-weight: 600; margin: 0 4px; }
+.plan-visual { margin-bottom: 18px; }
+.plan-visual .plan-text p { color: #37322f; font-size: 16px; line-height: 1.8; font-weight: 550; }
+.plan-step-details { display: grid; gap: 14px; }
+.plan-step-details > div { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; }
+.plan-step-details dt, .plan-reading-list dt { font-size: 12px; line-height: 1.9; color: #7a6557; font-weight: 600; padding-top: 2px; }
+.plan-step-details dd { min-width: 0; margin: 0; font-size: 13px; color: #5b5149; line-height: 1.85; overflow-wrap: anywhere; }
+.plan-step footer { border-top: 1px solid #eee7df; padding-top: 14px; margin-top: 20px; }
+.plan-block + .plan-block { border-top: 1px solid #eee6df; padding-top: 24px; margin-top: 24px; }
+.plan-title-list { padding: 0; list-style: none; display: grid; gap: 12px; }
+.plan-title-list li { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid #f0eae4; }
+.plan-title-index { font-size: 12px; color: #9b7763; }
+.plan-title-list .plan-text { flex: 1; min-width: 140px; }
+.plan-reading-list { display: grid; gap: 20px; }
+.plan-reading-list dd { margin-top: 5px; }
+.plan-hashtags { font-size: 14px; color: #98624a; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 2; }
+.plan-warnings { padding-left: 20px; list-style: disc; display: grid; gap: 12px; }
+.plan-footer { border-top: 1px solid #eee6df; margin-top: 28px; padding-top: 18px; }
+.plan-footer .plan-help { margin-bottom: 12px; }
+.plan-editor .video-field { margin-top: 20px; color: #554f49; }
+.plan-editor .video-field > label { font-size: 13px; }
+.plan-editor .video-field input, .plan-editor .video-field textarea { font-size: 14px; color: #433b36; }
+.plan-editor .video-field textarea { min-height: 100px; }
+.plan-editor .video-time { font-size: 13px; color: #735b4b; margin-top: 16px; }
+.plan-editor .video-time input { width: 80px; font-size: 14px; min-height: 42px; }
+.plan-editor .plan-done { background: #fff1e8; border-color: #e6caba; color: #8b4c35; }
+@media (max-width:767px) {
+  .video-results .copy-button, .video-results .secondary-button, .plan-editor .secondary-button, .video-results .text-button, .plan-editor .text-button { min-height: 44px; }
+  .plan-overview, .plan-step { padding: 16px; }
+  .plan-step-details > div { grid-template-columns: 48px minmax(0,1fr); gap: 10px; }
+  .plan-tabs button { flex: 1 0 auto; min-height: 44px; font-size: 12px; padding: 10px; }
+  .plan-heading { align-items: flex-start; }
+  .plan-header > .copy-button { justify-content: center; }
+  .plan-title-list .copy-button { margin-left: auto; }
+}
+@media (max-width:380px) {
+  .plan-step, .plan-overview { padding: 13px; }
+  .plan-step-header { gap: 8px; }
+  .plan-step-time { flex-basis: 100%; }
+  .plan-actions { gap: 6px; }
+}

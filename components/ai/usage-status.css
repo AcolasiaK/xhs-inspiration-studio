@@ -1,0 +1,15 @@
+.ai-usage-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.ai-usage-status a, .ai-usage-status button { color: var(--coral-dark); }
+.ai-usage-status a[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.ai-usage-status button { border: 0; background: transparent; padding: 0; font: inherit; }
+.ai-usage-status :is(a, button):focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }

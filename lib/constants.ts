@@ -1,0 +1,10 @@
+export const MAX_IMAGES = 9;
+export const MAX_FILE_BYTES = 5 * 1024 * 1024;
+export const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
+export const MAX_REQUEST_BYTES = MAX_IMAGE_BYTES + 256 * 1024;
+export const MAX_EDGE = 1600;
+export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+export const TONES = ["自然分享", "干货攻略", "轻松幽默", "种草推荐", "克制高级"] as const;
+export const PURPOSES = ["分享经历", "探店推荐", "产品介绍", "经验教程"] as const;
+export const LENGTHS = { short: "短 · 150–250 字", medium: "中 · 300–500 字", long: "长 · 600–800 字" } as const;
+export const LENGTH_RANGES = { short: [150, 250], medium: [300, 500], long: [600, 800] } as const;

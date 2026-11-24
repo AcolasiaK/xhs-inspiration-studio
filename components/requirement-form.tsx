@@ -1,0 +1,47 @@
+"use client";
+
+import { ChevronDown, WandSparkles } from "lucide-react";
+import { CREATION_TYPES, CREATION_TYPE_LABELS, REFERENCE_ASPECTS, type Brief } from "@/lib/schema";
+import { LENGTHS, PURPOSES, TONES } from "@/lib/constants";
+import type { ReactNode } from "react";
+
+const referenceLabels: Record<(typeof REFERENCE_ASPECTS)[number], string> = { tone: "语气", structure: "正文结构", opening: "开头方式", rhythm: "句子与段落节奏", imageCopy: "图上文字表达" };
+export function RequirementForm({ brief, onChange, onExample, disabled, styleControl, referenceControl }: { brief: Brief; onChange: (brief: Brief) => void; onExample: () => void; disabled: boolean; styleControl?: ReactNode; referenceControl?: ReactNode }) {
+  function field<K extends keyof Brief>(key: K, value: Brief[K]) { onChange({ ...brief, [key]: value }); }
+  function toggleType(type: Brief["primaryType"]) {
+    const selected = brief.creationTypes.includes(type);
+    if (selected && brief.creationTypes.length === 1) return;
+    const creationTypes = selected ? brief.creationTypes.filter((item) => item !== type) : [...brief.creationTypes, type];
+    onChange({ ...brief, creationTypes, primaryType: creationTypes.includes(brief.primaryType) ? brief.primaryType : creationTypes[0] });
+  }
+  return <section className="input-section brief-section" aria-labelledby="brief-title">
+    <div className="section-heading"><div className="section-name"><span className="step-number">02</span><h2 id="brief-title">说说你的灵感</h2></div><button type="button" className="text-button" disabled={disabled} onClick={onExample}><WandSparkles size={13} />填写示例</button></div>
+    <fieldset disabled={disabled} className="form-fields">
+      <div className="field"><label htmlFor="topic">这篇笔记想聊什么？<span className="required">*</span></label><input id="topic" value={brief.topic} onChange={(e) => field("topic", e.target.value)} placeholder="例如：周末探店、春日穿搭、旅行随记…" maxLength={100} required /></div>
+      <div className="field"><label htmlFor="details">补充一点想法<span className="optional">选填</span></label><textarea id="details" value={brief.details} onChange={(e) => field("details", e.target.value)} placeholder="有什么细节或感受想分享？" rows={3} maxLength={2000} /></div>
+      {styleControl}
+      <details className="more-settings creation-preferences"><summary>更多创作设置 <span>{CREATION_TYPE_LABELS[brief.primaryType]} · {LENGTHS[brief.length]}</span><ChevronDown size={14} /></summary><div className="advanced-fields">
+      <div className="field creation-type-field"><label id="creation-types-label">创作类型<span className="optional">可多选，至少选择一种</span></label><div className="tone-options" role="group" aria-labelledby="creation-types-label">{CREATION_TYPES.map((type) => <button type="button" key={type} className={`tone-chip ${brief.creationTypes.includes(type) ? "active" : ""}`} aria-pressed={brief.creationTypes.includes(type)} onClick={() => toggleType(type)}>{CREATION_TYPE_LABELS[type]}</button>)}</div><p className="field-help">主要类型决定方向，其余类型辅助表达。</p></div>
+      <div className="field"><label htmlFor="primary-type">主要类型</label><select id="primary-type" value={brief.primaryType} onChange={(e) => field("primaryType", e.target.value as Brief["primaryType"])}>{brief.creationTypes.map((type) => <option key={type} value={type}>{CREATION_TYPE_LABELS[type]}</option>)}</select></div>
+      {brief.creationTypes.includes("china") && <p className="field-help">环游中国会参考历史行程资料，不会把历史旅程当成你的亲身经历；标题默认不超过 20 字，正文与 10 个话题默认合计不超过 1000 字。</p>}
+      {brief.creationTypes.includes("travel") && <><div className="field"><label htmlFor="travel-focus">旅行攻略侧重</label><select id="travel-focus" value={brief.travelFocus} onChange={(e) => field("travelFocus", e.target.value as Brief["travelFocus"])}><option value="experience">行程记录和感受为主</option><option value="guide">实用攻略信息为主</option><option value="balanced">两者均衡</option></select></div><label className="travel-search-toggle"><input type="checkbox" checked={brief.travelSearch} onChange={(e) => field("travelSearch", e.target.checked)} />联网检索旅行信息 <span>默认开启；无法核实时会提示，不编造数据</span></label>{brief.travelSearch && <div className="field"><label htmlFor="travel-search-place">检索地点<span className="optional">选填</span></label><input id="travel-search-place" value={brief.travelSearchPlace} onChange={(e) => field("travelSearchPlace", e.target.value)} placeholder="例如：杭州西湖" maxLength={100} /><p className="field-help">只有这里填写的地点会发送给公开搜索服务；不填时跳过检索并提示，仍可生成。</p></div>}</>}
+      {brief.creationTypes.includes("daily") && <div className="field"><label htmlFor="daily-focus">日常分享方向</label><select id="daily-focus" value={brief.dailyFocus} onChange={(e) => field("dailyFocus", e.target.value as Brief["dailyFocus"])}><option value="auto">根据主题决定</option><option value="reflection">生活感悟</option><option value="record">轻松记录</option></select></div>}
+      <div className="field"><label htmlFor="style-notes">本次风格补充</label><textarea id="style-notes" value={brief.styleNotes} onChange={(e) => field("styleNotes", e.target.value)} placeholder="例如：短句、具体细节、少用形容词。" rows={2} maxLength={1000} /></div>
+      {!brief.writingStyle && <div className="field"><label id="tone-label">想用什么语气？</label><div className="tone-options" role="group" aria-labelledby="tone-label">{TONES.map((tone) => <button type="button" key={tone} className={`tone-chip ${brief.tone === tone ? "active" : ""}`} aria-pressed={brief.tone === tone} onClick={() => field("tone", tone)}>{tone}</button>)}</div></div>}
+      <div className="field-pair"><div className="field"><label htmlFor="purpose">发布目的</label><div className="select-wrap"><select id="purpose" value={brief.purpose} onChange={(e) => field("purpose", e.target.value as Brief["purpose"])}>{PURPOSES.map((p) => <option key={p}>{p}</option>)}</select><ChevronDown size={14} /></div></div><div className="field"><label htmlFor="length">正文长度</label><div className="select-wrap"><select id="length" value={brief.length} onChange={(e) => field("length", e.target.value as Brief["length"])}>{Object.entries(LENGTHS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select><ChevronDown size={14} /></div></div></div>
+      <div className="emoji-row"><span>使用 Emoji</span><button type="button" className={`switch ${brief.emoji ? "on" : ""}`} role="switch" aria-checked={brief.emoji} aria-label="使用 Emoji" onClick={() => field("emoji", !brief.emoji)}><span /></button></div>
+      </div></details>
+      <details className="more-settings"><summary>补充创作信息<ChevronDown size={14} /></summary><div className="advanced-fields">
+        {(brief.creationTypes.includes("china") || brief.creationTypes.includes("travel")) && <div className="field"><label htmlFor="supplement-travel">旅行地点、路线或注意事项</label><textarea id="supplement-travel" value={brief.supplementTravel} onChange={(e) => field("supplementTravel", e.target.value)} placeholder="填写已知的地点、路线、时间、消费或实用信息。" rows={3} maxLength={2000} /></div>}
+        {brief.creationTypes.includes("emotion") && <div className="field"><label htmlFor="supplement-emotion">情绪与背景</label><textarea id="supplement-emotion" value={brief.supplementEmotion} onChange={(e) => field("supplementEmotion", e.target.value)} placeholder="想表达什么感受？有什么背景或画面？" rows={3} maxLength={2000} /></div>}
+        {brief.creationTypes.includes("daily") && <div className="field"><label htmlFor="supplement-daily">日常细节与感受</label><textarea id="supplement-daily" value={brief.supplementDaily} onChange={(e) => field("supplementDaily", e.target.value)} placeholder="发生了什么小事？有什么生活细节想记录？" rows={3} maxLength={2000} /></div>}
+      </div></details>
+      <details className="more-settings"><summary>参考文案<ChevronDown size={14} /></summary><div className="advanced-fields"><div className="field"><label htmlFor="reference-text">粘贴参考文案</label><textarea id="reference-text" value={brief.referenceText} onChange={(e) => field("referenceText", e.target.value)} placeholder="粘贴想参考的文案。" rows={4} maxLength={6000} /></div><div className="field"><label id="reference-aspects-label">希望参考哪些写法？</label><div className="tone-options" role="group" aria-labelledby="reference-aspects-label">{REFERENCE_ASPECTS.map((aspect) => <button type="button" key={aspect} className={`tone-chip ${brief.referenceAspects.includes(aspect) ? "active" : ""}`} aria-pressed={brief.referenceAspects.includes(aspect)} onClick={() => field("referenceAspects", brief.referenceAspects.includes(aspect) ? brief.referenceAspects.filter((item) => item !== aspect) : [...brief.referenceAspects, aspect])}>{referenceLabels[aspect]}</button>)}</div><p className="field-help">仅本篇使用，参考经历不会当作你的经历。</p></div>{referenceControl}</div></details>
+      <details className="more-settings"><summary>更多创作偏好 <span>受众 · 必提内容 · 禁用词</span><ChevronDown size={14} /></summary><div className="advanced-fields">
+        <div className="field"><label htmlFor="audience">希望写给谁看？</label><input id="audience" value={brief.audience} onChange={(e) => field("audience", e.target.value)} placeholder="例如：喜欢周末出游的上班族" maxLength={100} /></div>
+        <div className="field"><label htmlFor="mustInclude">必须提到</label><textarea id="mustInclude" value={brief.mustInclude} onChange={(e) => field("mustInclude", e.target.value)} placeholder="用逗号分隔，例如：周末，慢下来" rows={2} maxLength={500} /></div>
+        <div className="field"><label htmlFor="forbidden">不要出现</label><input id="forbidden" value={brief.forbidden} onChange={(e) => field("forbidden", e.target.value)} placeholder="例如：全网第一，闭眼冲" maxLength={500} /></div>
+      </div></details>
+    </fieldset>
+  </section>;
+}

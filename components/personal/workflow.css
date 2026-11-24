@@ -1,0 +1,71 @@
+/* Personal-only single-panel workflow; page scroll remains the only outer scroll. */
+.personal-studio { --personal-flow-height:76px; --personal-flow-top:12px; }
+.personal-studio .personal-flow-nav { position:sticky; top:var(--personal-flow-top); z-index:15; margin-bottom:10px; padding:5px 12px; border:1px solid var(--line); border-radius:12px; background:var(--paper); box-shadow:0 3px 12px #282b3208; }
+.personal-studio .personal-flow-tabs { display:flex; align-items:stretch; min-width:0; }
+.personal-studio .personal-flow-tab { position:relative; flex:1; min-width:0; display:flex; align-items:center; justify-content:center; gap:10px; padding:4px 8px; min-height:48px; border:0; border-radius:8px; background:var(--paper); color:var(--ink); font-size:13px; line-height:1.5; text-align:left; }
+.personal-studio .personal-flow-tab + .personal-flow-tab::before { content:""; position:absolute; height:1px; width:clamp(14px,3vw,44px); left:0; top:50%; transform:translate(-50%,-50%); background:var(--line); pointer-events:none; }
+.personal-studio .personal-flow-tab:hover { background:var(--background); }
+.personal-studio .personal-flow-tab:focus-visible { outline:2px solid var(--coral); outline-offset:2px; z-index:1; }
+.personal-studio .personal-flow-dot { display:grid; place-items:center; flex:0 0 26px; width:26px; height:26px; border:1px solid var(--line); border-radius:50%; background:var(--paper); color:var(--personal-action); font-size:12px; font-weight:500; }
+.personal-studio .personal-flow-tab.is-complete .personal-flow-dot { border-color:var(--coral); color:var(--coral-dark); background:var(--coral-soft); }
+.personal-studio .personal-flow-tab[aria-selected=true] .personal-flow-dot { color:#fff; border-color:var(--coral); background:var(--coral); }
+.personal-studio .personal-flow-label { min-width:0; display:grid; gap:2px; font-weight:400; }
+.personal-studio .personal-flow-tab[aria-selected=true] .personal-flow-label > span { font-weight:500; }
+.personal-studio .personal-flow-label small { font-size:12px; line-height:1.5; color:var(--personal-muted); }
+.personal-studio .personal-flow-progress { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px 8px; border-top:1px solid var(--line); margin-top:8px; padding-top:6px; font-size:12px; }
+.personal-studio .personal-flow-progress > span { display:inline-flex; align-items:center; gap:6px; }
+.personal-studio .personal-flow-progress svg { width:14px; height:14px; }
+.personal-studio .personal-workspace { display:block; }
+.personal-studio .personal-workflow-panel { min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:12px; scroll-margin-top:calc(var(--personal-flow-top) + var(--personal-flow-height) + 12px); }
+.personal-studio .personal-workflow-panel:focus-visible { outline:2px solid var(--coral); outline-offset:3px; }
+.personal-studio .personal-workflow-panel :is(input,textarea,select,button,summary) { scroll-margin-top:calc(var(--personal-flow-top) + var(--personal-flow-height) + 12px); scroll-margin-bottom:12px; }
+.personal-studio .personal-panel-heading { display:flex; align-items:start; justify-content:space-between; gap:16px; padding:18px 24px 16px; }
+.personal-studio .personal-panel-heading > div:first-child > h2 { font-size:15px; line-height:1.5; font-weight:500; }
+.personal-studio .personal-panel-heading > div:first-child > p { margin-top:4px; font-size:12px; line-height:1.5; color:var(--personal-muted); }
+.personal-studio .personal-panel-status { flex-shrink:0; font-size:12px; color:var(--personal-muted); line-height:1.5; padding:3px 8px; border-radius:20px; background:var(--background); }
+.personal-studio .personal-workflow-panel .personal-step-content { padding:0 24px 24px; }
+.personal-studio .personal-pending-step { display:grid; justify-items:start; gap:12px; padding:10px 0 8px; font-size:13px; }
+.personal-studio #personal-prompt .personal-panel-heading { padding-top:16px; padding-bottom:14px; }
+.personal-studio #personal-prompt .personal-panel-heading p { display:none; }
+@media(max-width:767px) {
+  .personal-studio { --personal-flow-top:8px; --personal-flow-height:84px; }
+  .personal-studio .personal-flow-nav { padding:4px; margin-bottom:8px; border-radius:10px; }
+  .personal-studio .personal-flow-tab { flex-direction:column; justify-content:center; gap:2px; padding:2px; min-height:60px; text-align:center; }
+  .personal-studio .personal-flow-tab + .personal-flow-tab::before { top:16px; width:calc(100% - 44px); left:0; }
+  .personal-studio .personal-flow-dot { width:24px; height:24px; flex-basis:24px; }
+  .personal-studio .personal-flow-label { gap:1px; }
+  .personal-studio .personal-flow-label > span { font-size:13px; white-space:nowrap; }
+  .personal-studio .personal-flow-label small { font-size:11px; }
+  .personal-studio .personal-flow-progress { padding:4px 6px 0; margin-top:6px; }
+  .personal-studio .personal-panel-heading { padding:16px; gap:10px; }
+  .personal-studio .personal-workflow-panel .personal-step-content { padding:0 16px 20px; }
+}
+@media(max-width:360px) {
+  .personal-studio .personal-flow-tab { padding-inline:0; }
+}
+
+/* Fixed within the content column, visible from the first viewport. */
+.personal-studio .personal-main { padding-bottom:calc(var(--personal-dock-height, 150px) + 24px); }
+.personal-studio .personal-action-dock {
+  position:fixed; bottom:0; left:216px; right:0; z-index:20;
+  padding:10px 24px max(10px, env(safe-area-inset-bottom));
+  border-top:1px solid var(--line); background:var(--paper);
+  box-shadow:0 -4px 16px #282b3206;
+}
+.personal-studio .personal-action-dock-inner { max-width:992px; margin:auto; display:grid; gap:7px; }
+.personal-studio .personal-dock-buttons { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:8px; }
+.personal-studio .personal-dock-buttons > .personal-small-note { margin-right:auto; }
+.personal-studio .personal-action-dock .personal-shortcuts { margin:0; padding:0; border:0; }
+.personal-studio .personal-action-dock .personal-assist { margin:0; padding:0; border:0; }
+.personal-studio .personal-action-dock .storage-warning { margin:6px 0 0; }
+.personal-studio .personal-workflow-panel :is(input,textarea,select,button,summary) { scroll-margin-bottom:calc(var(--personal-dock-height, 150px) + 16px); }
+.personal-studio .personal-completion-toast { bottom:calc(var(--personal-dock-height, 150px) + 14px); }
+@media(max-width:767px) {
+  .personal-studio .personal-action-dock { left:0; padding:10px 16px max(10px, env(safe-area-inset-bottom)); }
+  .personal-studio .personal-action-dock :is(.personal-shortcut-buttons,.personal-final-actions) { display:contents; }
+  .personal-studio .personal-action-dock :is(.personal-shortcuts,.personal-dock-buttons) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .personal-studio .personal-action-dock .personal-shortcuts>.storage-warning { grid-column:1 / -1; }
+  .personal-studio .personal-action-dock button { min-height:42px; min-width:0; }
+  .personal-studio .personal-action-dock .personal-copy-menu>button { width:100%; }
+  .personal-studio .personal-action-dock .personal-dock-buttons>.generate-button:last-child:nth-child(3) { grid-column:1 / -1; }
+}

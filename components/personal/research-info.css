@@ -1,0 +1,25 @@
+.personal-research { min-width: 0; max-width: 100%; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line, #eceef2); font-size: 12px; line-height: 1.7; color: #737780; overflow-wrap: anywhere; }
+.personal-research p { margin: 0; }
+.personal-research-disabled { padding-top: 10px; }
+.personal-research-warning { color: #98532d; border-left: 2px solid #ddb79f; padding-left: 10px; margin-bottom: 7px !important; }
+.personal-research-disclosure, .personal-research-content, .personal-research-snippet { min-width: 0; max-width: 100%; }
+.personal-research-disclosure > summary { min-height: 36px; padding: 6px 0; cursor: pointer; color: #646873; font-weight: 500; line-height: 1.65; }
+.personal-research-disclosure > summary::marker { color: #a5a6ae; }
+.personal-research-complete { display: inline-block; margin-left: 10px; color: #7e8585; font-size: 11px; font-weight: 400; }
+.personal-research-content { padding-top: 8px; }
+.personal-research .personal-research-context { font-weight: 500; color: #646873; margin-bottom: 6px; }
+.personal-research-notice { line-height: 1.75; }
+.personal-research-meta { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; margin: 10px 0 0; }
+.personal-research-meta dt { color: #858892; }
+.personal-research-meta dd { margin: 0; min-width: 0; }
+.personal-research-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; }
+.personal-research-list li { min-width: 0; border-top: 1px solid #f0f0f2; padding-top: 10px; }
+.personal-research-link { display: inline; color: var(--coral-dark, #c85244); font-weight: 500; text-decoration: underline; text-decoration-color: #e5c0b9; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.personal-research .personal-research-publisher { margin-top: 4px; }
+.personal-research-url { font-size: 11px; color: #858892; overflow-wrap: anywhere; }
+.personal-research .personal-research-date { margin-top: 4px; font-size: 11px; }
+.personal-research-snippet { margin-top: 6px; }
+.personal-research-snippet > summary { min-height: 32px; padding: 4px 0; cursor: pointer; font-weight: 400; color: #737780; }
+.personal-research-snippet > p { margin-top: 5px; white-space: pre-wrap; line-height: 1.8; }
+.personal-research summary:focus-visible { outline: 2px solid var(--coral, #e76f60); outline-offset: 3px; border-radius: 3px; }
+@media (max-width: 600px) { .personal-research-disclosure > summary { min-height: 42px; padding-top: 9px; padding-bottom: 9px; } .personal-research-snippet > summary { min-height: 36px; } .personal-research-meta { column-gap: 8px; } }
